@@ -397,7 +397,11 @@ const Radar = function(size, radar) {
     var x = coordinates[0];
     var y = coordinates[1];
 
-    var group = quadrantGroup.append("g").attr("class", "blip-link");
+    var group = quadrantGroup
+      .append("g")
+      .attr("class", "blip-link triggerOpenModal")
+      .attr("data-modal", blip.description())
+      .attr("aria-controls", blip.description());
 
     if (blip.isNew()) {
       triangle(blip, x, y, order, group);
@@ -410,7 +414,6 @@ const Radar = function(size, radar) {
       .attr("x", x)
       .attr("y", y + 4)
       .attr("class", "blip-text")
-      // derive font-size from current blip width
       .style("font-size", (blip.width * 10) / 22 + "px")
       .attr("text-anchor", "middle")
       .text(blip.number());
