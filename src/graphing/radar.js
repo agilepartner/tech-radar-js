@@ -484,64 +484,6 @@ const Radar = function(size, radar) {
     d3.select(".legend").remove();
   }
 
-  function drawLegend(order) {
-    removeRadarLegend();
-
-    var triangleKey = "New or moved";
-    var circleKey = "No change";
-
-    var container = d3
-      .select("svg")
-      .append("g")
-      .attr("class", "legend legend" + "-" + order);
-
-    var x = 10;
-    var y = 10;
-
-    if (order == "first") {
-      x = (4 * size) / 5;
-      y = (1 * size) / 5;
-    }
-
-    if (order == "second") {
-      x = (1 * size) / 5 - 15;
-      y = (1 * size) / 5 - 20;
-    }
-
-    if (order == "third") {
-      x = (1 * size) / 5 - 15;
-      y = (4 * size) / 5 + 15;
-    }
-
-    if (order == "fourth") {
-      x = (4 * size) / 5;
-      y = (4 * size) / 5;
-    }
-
-    d3.select(".legend")
-      .attr("class", "legend legend-" + order)
-      .transition()
-      .style("visibility", "visible");
-
-    triangleLegend(x, y, container);
-
-    container
-      .append("text")
-      .attr("x", x + 15)
-      .attr("y", y + 5)
-      .attr("font-size", "0.8em")
-      .text(triangleKey);
-
-    circleLegend(x, y + 20, container);
-
-    container
-      .append("text")
-      .attr("x", x + 15)
-      .attr("y", y + 25)
-      .attr("font-size", "0.8em")
-      .text(circleKey);
-  }
-
   function redrawFullRadar() {
     removeHomeLink();
     removeRadarLegend();
@@ -686,10 +628,6 @@ const Radar = function(size, radar) {
         "transform",
         "translate(" + translateXAll + "," + translateYAll + ")scale(0)"
       );
-
-    if (d3.select(".legend.legend-" + order).empty()) {
-      drawLegend(order);
-    }
   }
 
   self.init = function() {
